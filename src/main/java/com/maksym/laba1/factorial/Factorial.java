@@ -1,4 +1,4 @@
-package factorial;
+package com.maksym.laba1.factorial;
 
 public interface Factorial {
 
