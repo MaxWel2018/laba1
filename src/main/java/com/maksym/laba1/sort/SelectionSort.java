@@ -1,7 +1,5 @@
 package com.maksym.laba1.sort;
 
-import com.maksym.laba1.utility.UtilityForSorting;
-
 public class SelectionSort implements Sort{
 
     @Override
@@ -13,7 +11,7 @@ public class SelectionSort implements Sort{
             for (int j = i+1; j < n; j++)
                 if (arrayForSorting[j] < arrayForSorting[minIndex])
                     minIndex = j;
-            UtilityForSorting.swap(arrayForSorting, minIndex,i);
+            Sort.swap(arrayForSorting, minIndex,i);
         }
     }
 }

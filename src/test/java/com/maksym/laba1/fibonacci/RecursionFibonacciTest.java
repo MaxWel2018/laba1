@@ -1,30 +1,54 @@
 package com.maksym.laba1.fibonacci;
 
-import org.junit.BeforeClass;
+import org.assertj.core.util.Arrays;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertEquals;
 
+@RunWith(Parameterized.class)
 public class RecursionFibonacciTest {
-    private   Fibonacci  fibonacci = new RecursionFibonacci();
-    private static HashMap<Integer, Long> fibonacciNum = new HashMap<>();
+    private Fibonacci fibonacci = new RecursionFibonacci();
 
-    @BeforeClass
-    public static void init() {
-        fibonacciNum.put(0,0L);
-        fibonacciNum.put(1,1L);
-        fibonacciNum.put(2,1L);
-        fibonacciNum.put(3,2L);
-        fibonacciNum.put(4,3L);
-        fibonacciNum.put(10,55L);
+    private int i;
+    private long expResult;
+
+    public RecursionFibonacciTest(int i, long expResult) {
+        this.i = i;
+        this.expResult = expResult;
     }
+
+    @Parameterized.Parameters
+    public static Collection data() {
+        Object[][] data = new Object[][]{
+                {0, 0}, {1, 1}, {2, 1}, {3, 2}, {4, 3},
+                {10, 55}, {20, 6765}, {30, 832040}
+
+        };
+        return Arrays.asList(data);
+    }
+
     @Test
-    public void fibonacci() {
-        for (Map.Entry<Integer, Long> entry : fibonacciNum.entrySet()) {
-            assertEquals(java.util.Optional.ofNullable(entry.getValue()),java.util.Optional.ofNullable(fibonacci.fibonacci(entry.getKey())));
-        }
+    public void shouldReturnNumberFibonacci() {
+        long result = fibonacci.fibonacci(i);
+        assertEquals(expResult, result);
+
+    }
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
+
+    @Test
+    public void shouldReturnException() {
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage(containsString("n must be positive"));
+        fibonacci.fibonacci(-10);
     }
 }

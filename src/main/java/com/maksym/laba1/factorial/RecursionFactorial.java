@@ -3,7 +3,7 @@ package com.maksym.laba1.factorial;
 import org.apache.log4j.Logger;
 
 public class RecursionFactorial implements Factorial {
-    private static final Logger log = Logger.getLogger(RecursionFactorial.class);
+    private static final Logger LOGGER = Logger.getLogger(RecursionFactorial.class);
 
     public long factorial(int n) {
         try {
@@ -11,12 +11,12 @@ public class RecursionFactorial implements Factorial {
 
                 if (n == 0 || n == 1) return 1;
                 return n * factorial(n - 1);
-            } else {
-                throw new IllegalArgumentException("n must be positive");
-            }
+
+            } else throw new IllegalArgumentException("n must be positive");
+
         } catch (IllegalArgumentException e) {
-            log.error(e.getMessage());
-            return 0;
+            LOGGER.error(e.getMessage());
+            throw e;
         }
     }
 }

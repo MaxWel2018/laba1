@@ -10,9 +10,7 @@ public class LoopFibonacci implements Fibonacci {
 
     public long fibonacci(int n) {
         try {
-            if (n < 0) {
-                throw new IllegalArgumentException("n must be positive");
-            }
+            if (n < 0) throw new IllegalArgumentException("n must be positive");
             if (n == 1) return 1;
             long n1 = 0;
             long n2 = 1;
@@ -25,7 +23,7 @@ public class LoopFibonacci implements Fibonacci {
             return result;
         } catch (IllegalArgumentException e) {
             log.error(e.getMessage());
-            return 0;
+            throw e;
 
         }
     }

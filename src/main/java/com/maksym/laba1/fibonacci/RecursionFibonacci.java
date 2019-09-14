@@ -15,7 +15,7 @@ public class RecursionFibonacci implements  Fibonacci  {
             } else throw new IllegalArgumentException("n must be positive");
         } catch (IllegalArgumentException e) {
             log.error(e.getMessage());
-            return 0;
+            throw e;
 
         }
     }

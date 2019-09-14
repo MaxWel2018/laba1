@@ -4,8 +4,8 @@ import org.apache.log4j.Logger;
 
 import java.math.BigInteger;
 
-public class BigNumFibonacci {
-    private static final Logger log = Logger.getLogger(BigNumFibonacci.class);
+ class BigNumFibonacci {
+    private static final Logger LOGGER = Logger.getLogger(BigNumFibonacci.class);
 
     BigInteger fibonacci = new BigInteger("0");
 
@@ -16,19 +16,19 @@ public class BigNumFibonacci {
                 throw new IllegalArgumentException("n must be positive");
             }
             if (n == 1) return "1";
-            BigInteger n1 = new BigInteger("0");
-            BigInteger n2 = new BigInteger("1");
+            BigInteger num1 = new BigInteger("0");
+            BigInteger num2 = new BigInteger("1");
             BigInteger result = new BigInteger("0");
 
             for (int i = 2; i <= n; i++) {
-                result = n1.add(n2);
-                n1 = n2;
-                n2 = result;
+                result = num1.add(num2);
+                num1 = num2;
+                num2 = result;
             }
             return result.toString();
         } catch (IllegalArgumentException e) {
-            log.error(e.getMessage());
+            LOGGER.error(e.getMessage());
+            throw e;
         }
-        return "0";
     }
 }
